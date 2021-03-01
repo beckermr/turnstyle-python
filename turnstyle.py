@@ -37,7 +37,7 @@ if wf is None:
 
 run = None
 for _run in wf.get_runs():
-    if _run.status == "in_progress":
+    if _run.status == "in_progress" and _run.id != os.environ["GITHUB_RUN_ID"]:
         run = _run
 
 if run is None:
