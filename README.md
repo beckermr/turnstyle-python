@@ -1,4 +1,7 @@
 # turnstyle-python
+
+[![test](https://github.com/beckermr/turnstyle-python/actions/workflows/tests.yml/badge.svg)](https://github.com/beckermr/turnstyle-python/actions/workflows/tests.yml)
+
 a python implementation of [softprops/turnstyle](https://github.com/softprops/turnstyle)
 
 See their documentation. This action works the same except that the branch input parameter is not supported and the github token 
