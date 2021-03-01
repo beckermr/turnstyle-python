@@ -18,6 +18,7 @@ jobs:
           poll-interval-seconds: 60
           continue-after-seconds: 10
           # abort-after-seconds: 10
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: run
         run: |

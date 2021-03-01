@@ -2,15 +2,11 @@
 name: 'action turnstyle'
 description: 'A GitHub Action for serializing workflow runs'
 author: 'beckermr'
-env:
-  'GITHUB_TOKEN': 'Repository token provided by Github Actions secrets'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    POLL: ${{ inputs.poll-interval-seconds }}
-    CONTINUE: ${{ inputs.continue-after-seconds }}
-    ABORT: ${{ inputs.abort-after-seconds }}
+    GITHUB_TOKEN: ${{ inputs.github_token }}
 inputs:
   poll-interval-seconds:
     description: "Number of seconds to wait in between checks for previous run completion (defaults to 60)"
@@ -18,6 +14,9 @@ inputs:
     description: "Maximum number of seconds to wait before moving forward (unbound by default). Mutually exclusive with abort-after-seconds"
   abort-after-seconds:
     description: "Maximum number of seconds to wait before failing the step (unbound by default). Mutually exclusive with continue-after-seconds"
+  github_token:
+    description: 'github token'
+    required: true
 outputs:
   force_continued:
     description: "True if continue-after-seconds is used and the step using turnstyle continued. False otherwise."

@@ -18,8 +18,6 @@ def _set_output(cmd):
     print("::set-output name=force_continued::%s" % cmd, flush=True)
 
 
-print(os.environ)
-
 # get inputs
 workflow_name = os.environ["GITHUB_WORKFLOW"]
 polling_interval = _parse_int("INPUT_POLL-INTERVAL-SECONDS", 60)
@@ -45,17 +43,17 @@ for _run in wf.get_runs():
 if run is None:
     sys.exit(0)
 
+print("waiting on workflow run %s..." % run.id, flush=True)
+
 start = time.time()
 while True:
-    time.sleep(polling_interval)
-    run = repo.get_workflow_run(run.id)
-
     if (
         continue_after is not None
         and time.time() - start > continue_after
         and run.status == "completed"
     ):
         _set_output("1")
+        print("continuing after %s seconds" % continue_after, flush=True)
         sys.exit(0)
 
     if (
@@ -64,4 +62,8 @@ while True:
         and run.status == "completed"
     ):
         _set_output("")
+        print("aborting after %s seconds" % abort_after, flush=True)
         sys.exit(1)
+
+    time.sleep(polling_interval)
+    run = repo.get_workflow_run(run.id)
