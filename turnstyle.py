@@ -53,7 +53,7 @@ while True:
         and dt > continue_after
     ):
         _set_output("1")
-        print("continuing after %s seconds" % dt, flush=True)
+        print("continuing after %d seconds" % dt, flush=True)
         sys.exit(0)
 
     if (
@@ -61,11 +61,11 @@ while True:
         and dt > abort_after
     ):
         _set_output("")
-        print("aborting after %s seconds" % dt, flush=True)
+        print("aborting after %d seconds" % dt, flush=True)
         sys.exit(1)
 
     if run.status == "completed":
-        print("wrokflow run %s finished after %s seconds" % (run.id, dt), flush=True)
+        print("wrokflow run %s finished after %d seconds" % (run.id, dt), flush=True)
         _set_output("")
         sys.exit(0)
 
