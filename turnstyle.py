@@ -28,9 +28,16 @@ gh = github.Github(os.environ["GITHUB_TOKEN"])
 repo = gh.get_repo(os.environ["GITHUB_REPOSITORY"])
 
 wf = None
+limit = 500
+done = 0
 for _wf in repo.get_workflows():
     if _wf.name == workflow_name:
         wf = _wf
+        break
+
+    done += 1
+    if done == limit:
+        break
 
 if wf is None:
     print("No workflow with name '%s' found! Continuing!" % workflow_name, flush=True)
@@ -38,9 +45,16 @@ if wf is None:
     sys.exit(0)
 
 run = None
+limit = 500
+done = 0
 for _run in wf.get_runs():
     if _run.status == "in_progress" and _run.id != int(os.environ["GITHUB_RUN_ID"]):
         run = _run
+        break
+
+    done += 1
+    if done == limit:
+        break
 
 if run is None:
     print("No running workflows found! Continuing!", flush=True)
