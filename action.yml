@@ -14,7 +14,7 @@ inputs:
     description: "Maximum number of seconds to wait before moving forward (unbound by default). Mutually exclusive with abort-after-seconds"
   abort-after-seconds:
     description: "Maximum number of seconds to wait before failing the step (unbound by default). Mutually exclusive with continue-after-seconds"
-  github_token:
+  github-token:
     description: 'github token'
     required: true
 outputs:
