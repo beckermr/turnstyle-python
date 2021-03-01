@@ -33,6 +33,7 @@ for _wf in repo.get_workflows():
         wf = _wf
 
 if wf is None:
+    print("No workflow with name '%s' found! Continuing!" % workflow_name, flush=True)
     _set_output("")
     sys.exit(0)
 
@@ -42,6 +43,7 @@ for _run in wf.get_runs():
         run = _run
 
 if run is None:
+    print("No running workflows found! Continuing!", flush=True)
     _set_output("")
     sys.exit(0)
 
