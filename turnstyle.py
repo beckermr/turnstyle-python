@@ -18,6 +18,8 @@ def _set_output(cmd):
     print("::set-output name=force_continued::%s" % cmd, flush=True)
 
 
+print(os.environ["GITHUB_RUN_ID"])
+
 # get inputs
 workflow_name = os.environ["GITHUB_WORKFLOW"]
 polling_interval = _parse_int("INPUT_POLL-INTERVAL-SECONDS", 60)
