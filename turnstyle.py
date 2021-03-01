@@ -33,6 +33,7 @@ for _wf in repo.get_workflows():
         wf = _wf
 
 if wf is None:
+    _set_output("")
     sys.exit(0)
 
 run = None
@@ -41,6 +42,7 @@ for _run in wf.get_runs():
         run = _run
 
 if run is None:
+    _set_output("")
     sys.exit(0)
 
 print("waiting on workflow run %s..." % run.id, flush=True)
