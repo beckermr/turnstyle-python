@@ -47,23 +47,27 @@ print("waiting on workflow run %s..." % run.id, flush=True)
 
 start = time.time()
 while True:
+    dt = time.time() - start
     if (
         continue_after is not None
-        and time.time() - start > continue_after
-        and run.status == "completed"
+        and dt > continue_after
     ):
         _set_output("1")
-        print("continuing after %s seconds" % continue_after, flush=True)
+        print("continuing after %s seconds" % dt, flush=True)
         sys.exit(0)
 
     if (
         abort_after is not None
-        and time.time() - start > continue_after
-        and run.status == "completed"
+        and dt > abort_after
     ):
         _set_output("")
-        print("aborting after %s seconds" % abort_after, flush=True)
+        print("aborting after %s seconds" % dt, flush=True)
         sys.exit(1)
+
+    if run.status == "completed":
+        print("wrokflow run %s finished after %s seconds" % (run.id, dt), flush=True)
+        _set_output("")
+        sys.exit(0)
 
     time.sleep(polling_interval)
     run = repo.get_workflow_run(run.id)
