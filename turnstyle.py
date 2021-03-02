@@ -27,6 +27,7 @@ abort_after = _parse_int("INPUT_ABORT-AFTER-SECONDS", 10)
 if "GITHUB_HEAD_REF" in os.environ:
     branch = os.environ["GITHUB_HEAD_REF"]
 elif "GITHUB_REF" in os.environ:
+    print(os.environ["GITHUB_REF"])
     branch = os.environ["GITHUB_REF"][11:]
 else:
     # TODO: should this be main?
