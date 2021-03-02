@@ -24,6 +24,14 @@ polling_interval = _parse_int("INPUT_POLL-INTERVAL-SECONDS", 60)
 continue_after = _parse_int("INPUT_CONTINUE-AFTER-SECONDS", 10)
 abort_after = _parse_int("INPUT_ABORT-AFTER-SECONDS", 10)
 
+if "GITHUB_HEAD_REF" in os.environ:
+    branch = os.environ["GITHUB_HEAD_REF"]
+elif "GITHUB_REF" in os.environ:
+    branch = os.environ["GITHUB_REF"][11:]
+else:
+    # TODO: should this be main?
+    branch = "master"
+
 gh = github.Github(os.environ["GITHUB_TOKEN"])
 repo = gh.get_repo(os.environ["GITHUB_REPOSITORY"])
 
@@ -47,8 +55,8 @@ if wf is None:
 run = None
 limit = 500
 done = 0
-for _run in wf.get_runs():
-    if _run.status == "in_progress" and _run.id != int(os.environ["GITHUB_RUN_ID"]):
+for _run in wf.get_runs(branch=branch):
+    if _run.status in ["in_progress"] and _run.id != int(os.environ["GITHUB_RUN_ID"]):
         run = _run
         break
 
