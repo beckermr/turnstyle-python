@@ -31,6 +31,7 @@ elif "GITHUB_REF" in os.environ:
 else:
     # TODO: should this be main?
     branch = "master"
+print("computed branch '%s' for workflow" % branch, flush=True)
 
 gh = github.Github(os.environ["GITHUB_TOKEN"])
 repo = gh.get_repo(os.environ["GITHUB_REPOSITORY"])
