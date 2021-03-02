@@ -24,10 +24,9 @@ polling_interval = _parse_int("INPUT_POLL-INTERVAL-SECONDS", 60)
 continue_after = _parse_int("INPUT_CONTINUE-AFTER-SECONDS", 10)
 abort_after = _parse_int("INPUT_ABORT-AFTER-SECONDS", 10)
 
-if "GITHUB_HEAD_REF" in os.environ:
+if "GITHUB_HEAD_REF" in os.environ and len(os.environ["GITHUB_HEAD_REF"]) > 0:
     branch = os.environ["GITHUB_HEAD_REF"]
-elif "GITHUB_REF" in os.environ:
-    print(os.environ["GITHUB_REF"])
+elif "GITHUB_REF" in os.environ and len(os.environ["GITHUB_REF"]) > 0:
     branch = os.environ["GITHUB_REF"][11:]
 else:
     # TODO: should this be main?
