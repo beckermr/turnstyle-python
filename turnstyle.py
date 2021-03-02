@@ -56,8 +56,12 @@ if wf is None:
 run = None
 limit = 500
 done = 0
-for _run in wf.get_runs(branch=branch):
-    if _run.status in ["in_progress"] and _run.id != int(os.environ["GITHUB_RUN_ID"]):
+for _run in wf.get_runs():
+    if (
+        _run.status in ["in_progress"] 
+        and _run.id != int(os.environ["GITHUB_RUN_ID"]) 
+        and _run.head_branch == branch
+    ):
         run = _run
         break
 
