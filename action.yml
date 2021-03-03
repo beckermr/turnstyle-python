@@ -1,6 +1,6 @@
 # https://help.github.com/en/articles/metadata-syntax-for-github-actions
-name: 'action turnstyle'
-description: 'A GitHub Action for serializing workflow runs'
+name: 'action turnstyle-python'
+description: 'A GitHub Action (in python!) for serializing workflow runs'
 author: 'beckermr'
 runs:
   using: 'docker'
