@@ -21,8 +21,8 @@ def _set_output(cmd):
 # get inputs
 workflow_name = os.environ["GITHUB_WORKFLOW"]
 polling_interval = _parse_int("INPUT_POLL-INTERVAL-SECONDS", 60)
-continue_after = _parse_int("INPUT_CONTINUE-AFTER-SECONDS", 10)
-abort_after = _parse_int("INPUT_ABORT-AFTER-SECONDS", 10)
+continue_after = _parse_int("INPUT_CONTINUE-AFTER-SECONDS", None)
+abort_after = _parse_int("INPUT_ABORT-AFTER-SECONDS", None)
 
 if "GITHUB_HEAD_REF" in os.environ and len(os.environ["GITHUB_HEAD_REF"]) > 0:
     branch = os.environ["GITHUB_HEAD_REF"]
