@@ -1,5 +1,5 @@
 #!/bin/sh -l
 
-echo $1
+env
 
 python /turnstyle.py
