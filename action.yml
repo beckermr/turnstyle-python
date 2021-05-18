@@ -7,6 +7,9 @@ runs:
   image: 'Dockerfile'
   env:
     GITHUB_TOKEN: ${{ inputs.github-token }}
+    POLL_INTERVAL: ${{ inputs.poll-interval-seconds }}
+    CONTINUE_AFTER: ${{ inputs.continue-after-seconds }}
+    ABORT_AFTER: ${{ inputs.abort-after-seconds }}
 inputs:
   poll-interval-seconds:
     description: "Number of seconds to wait in between checks for previous run completion (defaults to 60)"
