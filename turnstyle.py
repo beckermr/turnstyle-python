@@ -7,7 +7,7 @@ import github
 
 def _parse_int(name, default):
     if name not in os.environ:
-        print(list(os.environ.keys(), flush=True)
+        print(list(os.environ.keys()), flush=True)
         return None
     try:
         return int(os.environ[name])
