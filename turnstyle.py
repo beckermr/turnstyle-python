@@ -7,7 +7,6 @@ import github
 
 def _parse_int(name, default):
     if name not in os.environ:
-        print(list(os.environ.keys()), flush=True)
         return None
     try:
         return int(os.environ[name])
@@ -21,9 +20,9 @@ def _set_output(cmd):
 
 # get inputs
 workflow_name = os.environ["GITHUB_WORKFLOW"]
-polling_interval = _parse_int("INPUT_POLL-INTERVAL-SECONDS", 60)
-continue_after = _parse_int("INPUT_CONTINUE-AFTER-SECONDS", None)
-abort_after = _parse_int("INPUT_ABORT-AFTER-SECONDS", None)
+polling_interval = _parse_int("POLL_INTERVAL", 60)
+continue_after = _parse_int("CONTINUE_AFTER", None)
+abort_after = _parse_int("ABORT_AFTER", None)
 
 if "GITHUB_HEAD_REF" in os.environ and len(os.environ["GITHUB_HEAD_REF"]) > 0:
     branch = os.environ["GITHUB_HEAD_REF"]
