@@ -54,20 +54,28 @@ if wf is None:
     sys.exit(0)
 
 run = None
-limit = 500
-done = 0
-for _run in wf.get_runs():
-    if (
-        _run.status in ["in_progress"] 
-        and _run.id != int(os.environ["GITHUB_RUN_ID"]) 
-        and _run.head_branch == branch
-    ):
-        run = _run
-        break
+attempt = 0
+while run is None and attempt < 10:
+    try:
+        limit = 500
+        done = 0
+        for _run in wf.get_runs():
+            if (
+                _run.status in ["in_progress"] 
+                and _run.id != int(os.environ["GITHUB_RUN_ID"]) 
+                and _run.head_branch == branch
+            ):
+                run = _run
+                break
 
-    done += 1
-    if done == limit:
-        break
+            done += 1
+            if done == limit:
+                break
+    except Exception as e:
+        if attempt == 9:
+            raise e
+
+    attempt += 1
 
 if run is None:
     print("No running workflows found! Continuing!", flush=True)
