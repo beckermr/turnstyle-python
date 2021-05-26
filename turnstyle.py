@@ -37,7 +37,7 @@ gh = github.Github(os.environ["GITHUB_TOKEN"])
 repo = gh.get_repo(os.environ["GITHUB_REPOSITORY"])
 
 wf = None
-limit = 500
+limit = 100
 done = 0
 for _wf in repo.get_workflows():
     if _wf.name == workflow_name:
@@ -57,7 +57,7 @@ run = None
 attempt = 0
 while run is None and attempt < 10:
     try:
-        limit = 500
+        limit = 100
         done = 0
         for _run in wf.get_runs():
             if (
