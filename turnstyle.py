@@ -104,7 +104,7 @@ while True:
         sys.exit(1)
 
     if run.status == "completed":
-        print("wrokflow run %s finished after %d seconds" % (run.id, dt), flush=True)
+        print("workflow run %s finished after %d seconds" % (run.id, dt), flush=True)
         _set_output("")
         sys.exit(0)
 
