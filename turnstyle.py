@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+import subprocess
 
 import github
 
@@ -15,7 +16,11 @@ def _parse_int(name, default):
 
 
 def _set_output(cmd):
-    print("::set-output name=force_continued::%s" % cmd, flush=True)
+    subprocess.run(
+        'echo "force_continued=%s" >> "$GITHUB_OUTPUT"' % cmd,
+        check=True,
+        shell=True,
+    )
 
 
 # get inputs
