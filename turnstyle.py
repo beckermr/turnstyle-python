@@ -39,6 +39,8 @@ polling_interval = _parse_int("POLL_INTERVAL", 60)
 continue_after = _parse_int("CONTINUE_AFTER", None)
 abort_after = _parse_int("ABORT_AFTER", None)
 
+print("computed workflow name '%s'" % workflow_name, flush=True)
+
 if "GITHUB_HEAD_REF" in os.environ and len(os.environ["GITHUB_HEAD_REF"]) > 0:
     branch = os.environ["GITHUB_HEAD_REF"]
 elif "GITHUB_REF" in os.environ and len(os.environ["GITHUB_REF"]) > 0:
