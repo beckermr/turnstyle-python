@@ -20,9 +20,10 @@ def _parse_str(name, default):
         return default
 
     name = os.environ.get(name, default)
-
     if name == "" or name.lower() == "none":
         return default
+
+    return name
 
 
 def _set_output(cmd):
@@ -38,6 +39,8 @@ workflow_name = _parse_str("WORKFLOW_NAME", os.environ["GITHUB_WORKFLOW"])
 polling_interval = _parse_int("POLL_INTERVAL", 60)
 continue_after = _parse_int("CONTINUE_AFTER", None)
 abort_after = _parse_int("ABORT_AFTER", None)
+
+print("computed workflow name '%s'" % workflow_name, flush=True)
 
 if "GITHUB_HEAD_REF" in os.environ and len(os.environ["GITHUB_HEAD_REF"]) > 0:
     branch = os.environ["GITHUB_HEAD_REF"]
