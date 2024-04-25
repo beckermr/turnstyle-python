@@ -21,7 +21,7 @@ jobs:
           continue-after-seconds: 10
           # abort-after-seconds: 10
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # workflow-name: test
+          workflow-name: test
 
       - name: run
         run: |

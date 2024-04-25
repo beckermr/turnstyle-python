@@ -39,6 +39,9 @@ polling_interval = _parse_int("POLL_INTERVAL", 60)
 continue_after = _parse_int("CONTINUE_AFTER", None)
 abort_after = _parse_int("ABORT_AFTER", None)
 
+print(" wfn:", os.environ.get("WORKFLOW_NAME"), flush=True)
+print("ghwf:", os.environ.get("GITHUB_WORKFLOW"), flush=True)
+
 print("computed workflow name '%s'" % workflow_name, flush=True)
 
 if "GITHUB_HEAD_REF" in os.environ and len(os.environ["GITHUB_HEAD_REF"]) > 0:
