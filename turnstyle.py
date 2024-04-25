@@ -15,6 +15,16 @@ def _parse_int(name, default):
         return default
 
 
+def _parse_str(name, default):
+    if name not in os.environ:
+        return default
+
+    name = os.environ.get(name, default)
+
+    if name == "" or name.lower() == "none":
+        return default
+
+
 def _set_output(cmd):
     subprocess.run(
         'echo "force_continued=%s" >> "$GITHUB_OUTPUT"' % cmd,
@@ -24,7 +34,7 @@ def _set_output(cmd):
 
 
 # get inputs
-workflow_name = os.environ["GITHUB_WORKFLOW"]
+workflow_name = _parse_str("WORKFLOW_NAME", os.environ["GITHUB_WORKFLOW"])
 polling_interval = _parse_int("POLL_INTERVAL", 60)
 continue_after = _parse_int("CONTINUE_AFTER", None)
 abort_after = _parse_int("ABORT_AFTER", None)
@@ -66,8 +76,8 @@ while run is None and attempt < 10:
         done = 0
         for _run in wf.get_runs():
             if (
-                _run.status in ["in_progress"] 
-                and _run.id != int(os.environ["GITHUB_RUN_ID"]) 
+                _run.status in ["in_progress"]
+                and _run.id != int(os.environ["GITHUB_RUN_ID"])
                 and _run.head_branch == branch
             ):
                 run = _run

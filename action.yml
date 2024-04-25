@@ -10,6 +10,7 @@ runs:
     POLL_INTERVAL: ${{ inputs.poll-interval-seconds }}
     CONTINUE_AFTER: ${{ inputs.continue-after-seconds }}
     ABORT_AFTER: ${{ inputs.abort-after-seconds }}
+    WORKFLOW_NAME: ${{ inputs.workflow-name }}
 inputs:
   poll-interval-seconds:
     description: "Number of seconds to wait in between checks for previous run completion (defaults to 60)"
@@ -20,6 +21,8 @@ inputs:
   github-token:
     description: 'github token'
     required: true
+  workflow-name:
+    description: "The workflow name to check. Defaults to the current workflow. The branch of the workflow running this GHA step is used."
 outputs:
   force_continued:
     description: "True if continue-after-seconds is used and the step using turnstyle continued. False otherwise."
