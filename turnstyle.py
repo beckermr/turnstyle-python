@@ -73,7 +73,8 @@ if wf is None:
 
 run = None
 attempt = 0
-while run is None and attempt < 10:
+retry_me = True
+while retry_me and attempt < 10:
     try:
         limit = 100
         done = 0
@@ -89,6 +90,7 @@ while run is None and attempt < 10:
             done += 1
             if done == limit:
                 break
+        retry_me = False
     except Exception as e:
         if attempt == 9:
             raise e
