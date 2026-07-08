@@ -1,7 +1,7 @@
 # Container image that runs your code
-FROM python:3.8-slim
+FROM python:3.12-slim
 
-RUN pip install pygithub
+RUN pip install pygithub==2.8.1
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh

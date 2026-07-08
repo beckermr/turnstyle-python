@@ -51,7 +51,7 @@ else:
     branch = "master"
 print("computed branch '%s' for workflow" % branch, flush=True)
 
-gh = github.Github(os.environ["GITHUB_TOKEN"])
+gh = github.Github(auth=github.Auth.Token(os.environ["GITHUB_TOKEN"]))
 repo = gh.get_repo(os.environ["GITHUB_REPOSITORY"])
 
 wf = None
